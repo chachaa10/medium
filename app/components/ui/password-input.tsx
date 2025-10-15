@@ -111,7 +111,7 @@ export function PasswordInputStrengthChecker() {
   }, []);
 
   function getLabel() {
-    if (deferredPassword.length === 0) return "Password strength";
+    if (deferredPassword.length === 0) return "";
     if (!optionsLoaded) return "Loading strength checker";
 
     const score = strengthResult.score;
@@ -147,7 +147,13 @@ export function PasswordInputStrengthChecker() {
       >
         {Array.from({ length: 4 }).map((_, i) => {
           const color =
-            strengthResult.score >= 3 ? "bg-primary" : "bg-destructive";
+            strengthResult.score === 2
+              ? "bg-yellow-500"
+              : strengthResult.score === 3
+                ? "bg-green-400"
+                : strengthResult.score === 4
+                  ? "bg-green-500"
+                  : "bg-destructive";
 
           return (
             <div

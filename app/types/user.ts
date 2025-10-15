@@ -23,15 +23,15 @@ export const UserSchema = z.object({
 });
 
 // Used for validating a new user registration input.
-export const UserCreateSchema = UserSchema.pick({
+export const UserSignUpSchema = UserSchema.pick({
   name: true,
   email: true,
   password: true,
 });
 
-export const UserLoginSchema = UserSchema.pick({
-  email: true,
-  password: true,
+export const UserSignInSchema = z.object({
+  email: z.string().min(1, "Email is required"),
+  password: z.string().min(1, "Password is required"),
 });
 
 export const UserUpdateSchema = UserSchema.pick({
@@ -42,6 +42,6 @@ export const UserUpdateSchema = UserSchema.pick({
 });
 
 export type User = z.infer<typeof UserSchema>;
-export type UserCreate = z.infer<typeof UserCreateSchema>;
-export type UserLogin = z.infer<typeof UserLoginSchema>;
+export type UserSignUp = z.infer<typeof UserSignUpSchema>;
+export type UserSignIn = z.infer<typeof UserSignInSchema>;
 export type UserUpdate = z.infer<typeof UserUpdateSchema>;
