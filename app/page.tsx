@@ -1,38 +1,38 @@
 "use client";
-import Header from "@/app/components/layout/header";
-import { ThemeToggle } from "@/app/components/theme-button";
 import { authClient } from "@/app/lib/auth-client";
 import Loading from "@/app/loading";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { Button } from "./components/ui/button";
+import BetterAuthActionButton from "./components/features/auth/better-auth-action-button";
 
 export default function HomePage() {
   const { data: session, isPending: loading } = authClient.useSession();
+  const router = useRouter();
 
-  // quite buggy
   useEffect(() => {
-    if (!session && !loading) {
-      return redirect("/auth/login");
-    }
-  }, [session, loading]);
+    authClient.getSession().then((session) => {
+      if (session.data == null) {
+        router.push("/auth/login");
+      }
+    });
+  }, [router]);
 
-  if (loading || !session) {
+  if (loading) {
     return <Loading />;
   }
 
   return (
     <>
-      <Header>
-        <ThemeToggle />
-        <Button onClick={() => authClient.signOut()} variant={"destructive"}>
-          Logout
-        </Button>
-      </Header>
-      <main>
-        {/* TODO: add loading state */}
-        {session && <h1>Welcome {session.user.name}</h1>}
-      </main>
+      <BetterAuthActionButton
+        action={() => {
+          return authClient.signOut();
+        }}
+        onClick={() => router.push("/auth/login")}
+        variant={"destructive"}
+      >
+        Sign out
+      </BetterAuthActionButton>
+      <main>{session && <h1>Welcome {session.user.name}</h1>}</main>
     </>
   );
 }

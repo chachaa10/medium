@@ -1,25 +1,22 @@
 "use client";
-import AuthForm from "@/app/components/features/auth/AuthForm";
-import Google from "@/app/components/Google";
+import AuthForm from "@/app/components/features/auth/auth-form";
+import GoogleLogin from "@/app/components/features/auth/google-login";
 import { Button } from "@/app/components/ui/button";
 import { authClient } from "@/app/lib/auth-client";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function AuthPage() {
-  const { data: session, isPending: loading } = authClient.useSession();
+export default function LoginPage() {
   const [haveAccount, setHaveAccount] = useState(true);
+  const router = useRouter();
 
-  // quite buggy
   useEffect(() => {
-    if (session && !loading) {
-      return redirect("/");
-    }
-  }, [session, loading]);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+    authClient.getSession().then((session) => {
+      if (session.data != null) {
+        router.push("/");
+      }
+    });
+  }, [router]);
 
   return (
     <div className="flex flex-col justify-center items-center bg-background px-4 sm:px-6 lg:px-8 py-12 min-h-screen">
@@ -30,12 +27,7 @@ export default function AuthPage() {
           </h1>
         </div>
 
-        <div className="space-y-4">
-          <Button variant="outline" className="rounded-2xl w-full">
-            <Google className="size-5" />
-            {haveAccount ? "Sign in with Google" : "Sign up with Google"}
-          </Button>
-        </div>
+        <GoogleLogin haveAccount={haveAccount} />
 
         <div className="relative">
           <div className="absolute inset-0 flex items-center">

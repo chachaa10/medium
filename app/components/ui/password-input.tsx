@@ -111,7 +111,7 @@ export function PasswordInputStrengthChecker() {
   }, []);
 
   function getLabel() {
-    if (deferredPassword.length === 0) return "";
+    if (deferredPassword.length === 0) return "Password strength";
     if (!optionsLoaded) return "Loading strength checker";
 
     const score = strengthResult.score;

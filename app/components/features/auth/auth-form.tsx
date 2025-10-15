@@ -44,8 +44,6 @@ export default function AuthForm(props: AuthFormProps) {
     },
   });
 
-  const { isSubmitting } = form.formState;
-
   function onSubmit(data: UserSignUp | UserSignIn) {
     if (haveAccount) {
       handleSignIn(data as UserSignIn);
@@ -55,6 +53,7 @@ export default function AuthForm(props: AuthFormProps) {
   }
 
   async function handleSignUp(data: UserSignUp) {
+    await new Promise((r) => setTimeout(r, 1000));
     await authClient.signUp.email(
       {
         ...data,
@@ -88,6 +87,8 @@ export default function AuthForm(props: AuthFormProps) {
       },
     );
   }
+
+  const { isSubmitting } = form.formState;
 
   return (
     <Form {...form}>
