@@ -1,0 +1,1 @@
+ALTER TABLE "users" ADD COLUMN "is_author" boolean DEFAULT false NOT NULL;

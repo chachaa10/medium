@@ -42,6 +42,7 @@ export const users = pgTable(
     image: text("image"),
     bio: text("bio"),
     avatarUrl: text("avatar_url"),
+    isAuthor: boolean("is_author").default(false).notNull(),
     deletedAt,
     createdAt,
     updatedAt,
