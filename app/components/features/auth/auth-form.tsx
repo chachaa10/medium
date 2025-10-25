@@ -1,9 +1,4 @@
 "use client";
-
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 import { Button } from "@/app/components/ui/button";
 import {
   Form,
@@ -21,11 +16,15 @@ import {
 } from "@/app/components/ui/password-input";
 import { authClient } from "@/app/lib/auth-client";
 import {
-  type UserSignIn,
-  UserSignInSchema,
-  type UserSignUp,
-  UserSignUpSchema,
-} from "@/app/types/user";
+  UserSigninSchema,
+  UserSignupSchema,
+  type UserSignin,
+  type UserSignup,
+} from "@/app/types/definitions";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 interface AuthFormProps {
   haveAccount: boolean;
@@ -35,8 +34,8 @@ export default function AuthForm(props: AuthFormProps) {
   const router = useRouter();
   const { haveAccount } = props;
 
-  const form = useForm<UserSignUp | UserSignIn>({
-    resolver: zodResolver(haveAccount ? UserSignInSchema : UserSignUpSchema),
+  const form = useForm<UserSignup | UserSignin>({
+    resolver: zodResolver(haveAccount ? UserSigninSchema : UserSignupSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -44,15 +43,15 @@ export default function AuthForm(props: AuthFormProps) {
     },
   });
 
-  function onSubmit(data: UserSignUp | UserSignIn) {
+  function onSubmit(data: UserSignup | UserSignin) {
     if (haveAccount) {
-      handleSignIn(data as UserSignIn);
+      handleSignIn(data as UserSignin);
     } else {
-      handleSignUp(data as UserSignUp);
+      handleSignUp(data as UserSignup);
     }
   }
 
-  async function handleSignUp(data: UserSignUp) {
+  async function handleSignUp(data: UserSignup) {
     await new Promise((r) => setTimeout(r, 1000));
     await authClient.signUp.email(
       {
@@ -66,11 +65,11 @@ export default function AuthForm(props: AuthFormProps) {
         onSuccess: () => {
           router.push("/");
         },
-      },
+      }
     );
   }
 
-  async function handleSignIn(data: UserSignIn) {
+  async function handleSignIn(data: UserSignin) {
     await authClient.signIn.email(
       {
         ...data,
@@ -83,7 +82,7 @@ export default function AuthForm(props: AuthFormProps) {
         onSuccess: () => {
           router.push("/");
         },
-      },
+      }
     );
   }
 
@@ -91,7 +90,10 @@ export default function AuthForm(props: AuthFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-4"
+      >
         {!haveAccount && (
           <FormField
             control={form.control}
@@ -114,7 +116,10 @@ export default function AuthForm(props: AuthFormProps) {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="email@example.com" {...field} />
+                <Input
+                  placeholder="email@example.com"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -136,7 +141,11 @@ export default function AuthForm(props: AuthFormProps) {
           )}
         />
 
-        <Button type="submit" className="w-full" disabled={isSubmitting}>
+        <Button
+          type="submit"
+          className="w-full"
+          disabled={isSubmitting}
+        >
           <LoadingSwap isLoading={isSubmitting}>
             {haveAccount ? "Sign In" : "Sign Up"}
           </LoadingSwap>
