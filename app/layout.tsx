@@ -1,4 +1,3 @@
-import Header from "@/app/components/layout/header";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "./components/theme-provider";
@@ -29,7 +28,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased scroll-smooth`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased scroll-smooth `}
       >
         <ThemeProvider
           attribute="class"
@@ -37,10 +36,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
           enableSystem
           disableTransitionOnChange
           enableColorScheme={true}
-          storageKey="theme"
+          storageKey="medium-theme"
         >
-          <Header />
-          {children}
+          <div className="p-4 min-h-screen">{children}</div>
           <Toaster />
         </ThemeProvider>
       </body>
