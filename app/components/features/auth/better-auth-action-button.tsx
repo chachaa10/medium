@@ -6,10 +6,12 @@ import { ActionButton } from "../../ui/action-button";
 export default function BetterAuthActionButton({
   action,
   successMessage,
+  onSuccess,
   ...props
 }: Omit<ComponentProps<typeof ActionButton>, "action"> & {
   action: () => Promise<{ error: null | { message?: string } }>;
   successMessage?: string;
+  onSuccess?: () => void;
 }) {
   return (
     <ActionButton
@@ -22,6 +24,9 @@ export default function BetterAuthActionButton({
             message: result.error.message || "Action failed",
           };
         } else {
+          if (onSuccess) {
+            onSuccess();
+          }
           return { error: false, message: successMessage };
         }
       }}

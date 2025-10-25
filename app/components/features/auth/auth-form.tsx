@@ -1,5 +1,9 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { Button } from "@/app/components/ui/button";
 import {
   Form,
@@ -17,15 +21,11 @@ import {
 } from "@/app/components/ui/password-input";
 import { authClient } from "@/app/lib/auth-client";
 import {
-  UserSignInSchema,
-  UserSignUpSchema,
   type UserSignIn,
+  UserSignInSchema,
   type UserSignUp,
+  UserSignUpSchema,
 } from "@/app/types/user";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 
 interface AuthFormProps {
   haveAccount: boolean;
@@ -75,7 +75,6 @@ export default function AuthForm(props: AuthFormProps) {
       {
         ...data,
         callbackURL: "/",
-        rememberMe: true,
       },
       {
         onError: (error) => {

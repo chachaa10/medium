@@ -1,5 +1,18 @@
 "use client";
 
+import { zxcvbn, zxcvbnOptions } from "@zxcvbn-ts/core";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
+import {
+  type ChangeEvent,
+  type ComponentProps,
+  createContext,
+  type ReactNode,
+  useContext,
+  useDeferredValue,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
 import {
@@ -8,19 +21,6 @@ import {
   TooltipTrigger,
 } from "@/app/components/ui/tooltip";
 import { cn } from "@/app/utils/tailwind-merge";
-import { zxcvbn, zxcvbnOptions } from "@zxcvbn-ts/core";
-import { EyeIcon, EyeOffIcon } from "lucide-react";
-import {
-  createContext,
-  useContext,
-  useDeferredValue,
-  useEffect,
-  useMemo,
-  useState,
-  type ChangeEvent,
-  type ComponentProps,
-  type ReactNode,
-} from "react";
 
 const PasswordInputContext = createContext<{ password: string } | null>(null);
 

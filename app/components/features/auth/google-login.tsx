@@ -1,7 +1,6 @@
 "use client";
 
 import Google from "@/app/components/google-icon";
-import { Button } from "@/app/components/ui/button";
 import { authClient } from "@/app/lib/auth-client";
 import BetterAuthActionButton from "./better-auth-action-button";
 
