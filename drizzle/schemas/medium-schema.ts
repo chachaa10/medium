@@ -35,7 +35,6 @@ export const users = pgTable(
   "users",
   {
     id: id(),
-    username: varchar("username", { length: 50 }),
     name: text("name").notNull(),
     email: text("email").notNull().unique(),
     emailVerified: boolean("email_verified").default(false).notNull(),
@@ -50,7 +49,6 @@ export const users = pgTable(
   (table) => {
     return {
       emailIdx: uniqueIndex("idx_users_email").on(table.email),
-      usernameIdx: uniqueIndex("idx_users_username").on(table.username),
     };
   }
 );

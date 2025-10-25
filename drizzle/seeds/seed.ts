@@ -10,7 +10,6 @@ import {
   sessions,
   tags,
   users,
-  verifications,
 } from "../schema";
 
 import * as dotenv from "dotenv";
