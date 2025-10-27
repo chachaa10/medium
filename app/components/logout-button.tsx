@@ -11,6 +11,7 @@ export default function Logout() {
       action={async () => {
         return authClient.signOut();
       }}
+      className="cursor-pointer"
       variant={"destructive"}
       onSuccess={() => {
         router.refresh();

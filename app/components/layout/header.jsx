@@ -1,3 +1,6 @@
+import Logo from "@/app/components/features/navigation/logo";
+import Search from "@/app/components/features/navigation/search";
+import SidebarToggle from "@/app/components/features/navigation/sidebar-toggle";
 import Logout from "@/app/components/logout-button";
 import { ThemeToggle } from "@/app/components/theme-button";
 import { getCurrentUser } from "@/app/data/user";
@@ -6,9 +9,11 @@ export default async function Header() {
   const session = await getCurrentUser();
 
   return (
-    <header className="flex justify-between items-center">
-      <div>
-        <h1 className="font-bold text-3xl">Medium</h1>
+    <header className="left-0 z-99 fixed flex justify-between items-center bg-background dark:bg-neutral-900 border-b w-full h-15">
+      <div className="flex items-center">
+        <SidebarToggle />
+        <Logo />
+        <Search />
       </div>
       <div className="flex gap-2">
         {session && <Logout />}

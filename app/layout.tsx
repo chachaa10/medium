@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Header from "./components/layout/header";
 import { ThemeProvider } from "./components/theme-provider";
+import { SidebarProvider } from "./components/ui/sidebar";
 import { Toaster } from "./components/ui/sonner";
-import "./globals.css";
+import "./global.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,7 +33,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       suppressHydrationWarning
     >
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased scroll-smooth `}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased scroll-smooth`}
       >
         <ThemeProvider
           attribute="class"
@@ -41,10 +42,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
           disableTransitionOnChange
           storageKey="medium-theme"
         >
-          <div className="grid grid-rows-[auto_1fr] p-4">
-            <Header />
-            {children}
-          </div>
+          <Header />
+          <div className="pt-18">{children}</div>
           <Toaster />
         </ThemeProvider>
       </body>
