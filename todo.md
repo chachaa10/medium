@@ -25,26 +25,21 @@
 
 ## Project Setup
 
-- [ ] **Init repository & basic files**
+- [x] **Init repository & basic files**
 
-  - [ ] Create GitHub repo (public/private as desired)
-  - [ ] Add `README.md` (short project brief)
-  - [ ] Add `.gitignore`
+  - [x] Create GitHub repo (public/private as desired)
+  - [x] Add `README.md` (short project brief)
+  - [x] Add `.gitignore`
   - [ ] Add `LICENSE`
   - [ ] Add `CODE_OF_CONDUCT.md` (optional)
   - Acceptance: Repo visible, cloning works, README contains project goal and stack.
 
-- [ ] **Repo skeleton**
+- [x] **Repo skeleton**
 
-  - [ ] Create `/client` and `/server` folders or monorepo structure
-  - [ ] Add `package.json` in root with workspace scripts (if monorepo)
-  - [ ] Add `./.env.example`
+  - [x] Create `/client` and `/server` folders or monorepo structure
+  - [x] Add `package.json` in root with workspace scripts (if monorepo)
+  - [x] Add `./.env.example`
   - Acceptance: `npm run dev` or `pnpm dev` starts both client/server locally per scripts.
-
-- [ ] **Branching & commit guide**
-
-  - [ ] Add CONTRIBUTING.md with branch naming & commit conventions
-  - Acceptance: Document present and clear.
 
 ---
 
@@ -113,9 +108,9 @@
   - [ ] Scripts to seed dev database (small sample users & articles)
   - Acceptance: `docker-compose up` brings up DB and app connects.
 
-- [ ] **Environment variables**
+- [x] **Environment variables**
 
-  - [ ] Define required env vars in `.env.example`:
+  - [x] Define required env vars in `.env.example`:
 
     - `DATABASE_URL`, `JWT_SECRET`, `NODE_ENV`, `NEXT_PUBLIC_API_URL`, `CLOUDINARY_URL` (optional)
 
@@ -136,8 +131,6 @@
 ---
 
 ## Database & Backend
-
-> Use Prisma + Node.js (Express / Fastify) or Next.js API routes — choose one approach and be consistent.
 
 - [ ] **DB schema & migrations**
 
@@ -161,7 +154,7 @@
 
   - Subtasks:
 
-    - [ ] Implement password hashing (bcrypt/argon2)
+    - [x] Implement password hashing (bcrypt/argon2)
     - [ ] Implement JWT or session cookie logic
     - [ ] Implement simple rate-limiting on auth endpoints
 

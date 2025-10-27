@@ -1,6 +1,5 @@
 import type z from "zod";
-
-import type * as t from "./schemas";
+import type * as t from "./models";
 
 export type User = z.infer<typeof t.UserSchema>;
 export type UserSignup = z.infer<typeof t.UserSignupSchema>;

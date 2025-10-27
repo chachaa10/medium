@@ -1,4 +1,5 @@
 "use client";
+
 import { Button } from "@/app/components/ui/button";
 import {
   Form,
@@ -10,19 +11,12 @@ import {
 } from "@/app/components/ui/form";
 import { Input } from "@/app/components/ui/input";
 import { LoadingSwap } from "@/app/components/ui/loading-swap";
-import {
-  PasswordInput,
-  PasswordInputStrengthChecker,
-} from "@/app/components/ui/password-input";
+import { PasswordInput } from "@/app/components/ui/password-input";
 import { authClient } from "@/app/lib/auth-client";
-import {
-  UserSigninSchema,
-  UserSignupSchema,
-  type UserSignin,
-  type UserSignup,
-} from "@/app/types/definitions";
+import type { UserSignin, UserSignup } from "@/app/types";
+import { UserSigninSchema, UserSignupSchema } from "@/app/types/models";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -31,8 +25,8 @@ interface AuthFormProps {
 }
 
 export default function AuthForm(props: AuthFormProps) {
-  const router = useRouter();
   const { haveAccount } = props;
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<UserSignup | UserSignin>({
     resolver: zodResolver(haveAccount ? UserSigninSchema : UserSignupSchema),
@@ -44,6 +38,7 @@ export default function AuthForm(props: AuthFormProps) {
   });
 
   function onSubmit(data: UserSignup | UserSignin) {
+    setIsSubmitting(true);
     if (haveAccount) {
       handleSignIn(data as UserSignin);
     } else {
@@ -52,7 +47,6 @@ export default function AuthForm(props: AuthFormProps) {
   }
 
   async function handleSignUp(data: UserSignup) {
-    await new Promise((r) => setTimeout(r, 1000));
     await authClient.signUp.email(
       {
         ...data,
@@ -61,9 +55,10 @@ export default function AuthForm(props: AuthFormProps) {
       {
         onError: (error) => {
           toast.error(error.error.message || "Something went wrong");
+          setIsSubmitting(false);
         },
         onSuccess: () => {
-          router.push("/");
+          window.location.replace("/");
         },
       }
     );
@@ -78,15 +73,14 @@ export default function AuthForm(props: AuthFormProps) {
       {
         onError: (error) => {
           toast.error(error.error.message || "Invalid Credentials");
+          setIsSubmitting(false);
         },
         onSuccess: () => {
-          router.push("/");
+          window.location.replace("/");
         },
       }
     );
   }
-
-  const { isSubmitting } = form.formState;
 
   return (
     <Form {...form}>
@@ -132,9 +126,7 @@ export default function AuthForm(props: AuthFormProps) {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <PasswordInput {...field}>
-                  {!haveAccount && <PasswordInputStrengthChecker />}
-                </PasswordInput>
+                <PasswordInput {...field}></PasswordInput>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -147,7 +139,7 @@ export default function AuthForm(props: AuthFormProps) {
           disabled={isSubmitting}
         >
           <LoadingSwap isLoading={isSubmitting}>
-            {haveAccount ? "Sign In" : "Sign Up"}
+            {haveAccount ? "Login" : "Sign Up"}
           </LoadingSwap>
         </Button>
       </form>

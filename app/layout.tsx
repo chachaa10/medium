@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Header from "./components/layout/header";
 import { ThemeProvider } from "./components/theme-provider";
 import { Toaster } from "./components/ui/sonner";
 import "./globals.css";
@@ -26,7 +27,10 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+    >
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased scroll-smooth `}
       >
@@ -35,10 +39,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
-          enableColorScheme={true}
           storageKey="medium-theme"
         >
-          <div className="p-4 min-h-screen">{children}</div>
+          <div className="grid grid-rows-[auto_1fr] p-4">
+            <Header />
+            {children}
+          </div>
           <Toaster />
         </ThemeProvider>
       </body>

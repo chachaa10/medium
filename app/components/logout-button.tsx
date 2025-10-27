@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { authClient } from "../lib/auth-client";
 import BetterAuthActionButton from "./features/auth/better-auth-action-button";
 
-export default function SignOutButton() {
+export default function Logout() {
   const router = useRouter();
   return (
     <BetterAuthActionButton
@@ -13,10 +13,10 @@ export default function SignOutButton() {
       }}
       variant={"destructive"}
       onSuccess={() => {
-        router.push("/auth/login");
+        router.refresh();
       }}
     >
-      Sign out
+      Logout
     </BetterAuthActionButton>
   );
 }

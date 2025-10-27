@@ -63,7 +63,6 @@ export const UserSoftDeleteRequestSchema = z
   })
   .strict();
 
-// --- Post Schemas ---
 export const PostStatusEnum = z
   .enum(["draft", "published", "archived"])
   .default("draft");
@@ -71,10 +70,10 @@ export const PostStatusEnum = z
 export const PostSchema = z.object({
   id: id,
   authorId: id,
-  title: z.string().min(1, "Title is required.").max(255, "Title is too long."),
-  subtitle: z.string().max(255).nullable().optional(),
-  content: z.string().min(1, "Content is required."),
-  slug: z.string().max(255).nullable().optional(),
+  title: z.string(),
+  subtitle: z.string().optional().nullable(),
+  content: z.string(),
+  slug: z.string().optional().nullable(),
   status: PostStatusEnum,
   publishedAt: optionalTimestamp,
   deletedAt: optionalTimestamp,
@@ -86,21 +85,33 @@ export const PostCreateSchema = PostSchema.omit({
   id: true,
   createdAt: true,
   updatedAt: true,
+  deletedAt: true,
 }).extend({
+  title: z.string().min(1, "Title is required.").max(255, "Title is too long."),
   subtitle: z.string().max(255).optional().nullable(),
+  content: z.string().min(1, "Content is required."),
   slug: z.string().max(255).optional().nullable(),
   publishedAt: z.never().optional(), // Should be set separately or by a service
-  deletedAt: z.never().optional(), // Prevent setting deletedAt on creation
 });
 
 export const PostUpdateBaseSchema = PostSchema.pick({
+  id: true,
   title: true,
   subtitle: true,
   content: true,
   slug: true,
 });
 
-export const PostUpdateSchema = PostUpdateBaseSchema.partial();
+export const PostUpdateSchema = PostUpdateBaseSchema.pick({
+  title: true,
+  subtitle: true,
+  content: true,
+  slug: true,
+})
+  .partial()
+  .extend({
+    id: z.uuid().min(1, "Post ID is required."),
+  });
 
 export const PostSoftDeleteRequestSchema = z
   .object({
@@ -108,22 +119,23 @@ export const PostSoftDeleteRequestSchema = z
       error: "You must confirm post deletion.",
     }),
   })
-  .strict();
+  .strict()
+  .extend({
+    id: z.uuid().min(1, "Post ID is required."),
+  });
 
-// --- Tag Schemas ---
 export const TagSchema = z.object({
   id: id,
   name: z.string().min(1, "Name is required.").max(50),
 });
 
-// --- PostTag Schemas (Many-to-Many) ---
+// --- PostTag (Many-to-Many) ---
 export const PostTagSchema = z.object({
   id,
   postId: id,
   tagId: id,
 });
 
-// --- Clap Schemas ---
 export const ClapSchema = z.object({
   id,
   postId: id,
@@ -132,7 +144,6 @@ export const ClapSchema = z.object({
   createdAt: timestamp,
 });
 
-// --- Comment Schemas (Adjacency List) ---
 export const CommentSchema = z.object({
   id,
   postId: id,
@@ -143,7 +154,6 @@ export const CommentSchema = z.object({
   createdAt: timestamp,
 });
 
-// --- Follow Schemas ---
 export const FollowSchema = z.object({
   id,
   followerId: id,
@@ -151,7 +161,6 @@ export const FollowSchema = z.object({
   createdAt: timestamp,
 });
 
-// --- Bookmark Schemas ---
 export const BookmarkSchema = z.object({
   id,
   userId: id,

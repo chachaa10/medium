@@ -1,17 +1,17 @@
-"use client";
-import { authClient } from "@/app/lib/auth-client";
-import SignOutButton from "../sign-out-button";
-import { ThemeToggle } from "../theme-button";
+import Logout from "@/app/components/logout-button";
+import { ThemeToggle } from "@/app/components/theme-button";
+import { getCurrentUser } from "@/app/data/user";
 
-export default function Header() {
-  const { data: session } = authClient.useSession();
+export default async function Header() {
+  const session = await getCurrentUser();
+
   return (
     <header className="flex justify-between items-center">
       <div>
         <h1 className="font-bold text-3xl">Medium</h1>
       </div>
       <div className="flex gap-2">
-        {session && <SignOutButton />}
+        {session && <Logout />}
         <ThemeToggle />
       </div>
     </header>

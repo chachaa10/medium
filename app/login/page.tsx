@@ -1,32 +1,29 @@
 "use client";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+
 import AuthForm from "@/app/components/features/auth/auth-form";
 import GoogleLogin from "@/app/components/features/auth/google-login";
-import Header from "@/app/components/layout/header";
 import { Button } from "@/app/components/ui/button";
 import { authClient } from "@/app/lib/auth-client";
+import { redirect } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function LoginPage() {
   const [haveAccount, setHaveAccount] = useState(true);
 
-  // TODO: remove this code and make a middleware
-  const router = useRouter();
-
-  const { data: session, isPending } = authClient.useSession();
+  const { data: session, isPending: loading } = authClient.useSession();
 
   useEffect(() => {
-    if (session) {
-      router.push("/");
+    if (session && !loading) {
+      redirect("/");
     }
-  }, [session, router]);
+  }, [session, loading]);
 
-  if (isPending) return null;
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <>
-      <Header />
-
+    <div>
       <div className="flex flex-col justify-center items-center bg-background px-4 sm:px-6 lg:px-8 py-12 min-h-screen">
         <div className="space-y-8 mx-auto w-full max-w-md">
           <div className="text-center">
@@ -51,7 +48,7 @@ export default function LoginPage() {
           {/* Email and Password */}
           <AuthForm
             haveAccount={haveAccount}
-            key={haveAccount ? "signin" : "signup"}
+            key={haveAccount ? "login" : "signup"}
           />
 
           <p className="text-muted-foreground text-sm text-center">
@@ -60,11 +57,11 @@ export default function LoginPage() {
               variant={"link"}
               onClick={() => setHaveAccount(!haveAccount)}
             >
-              {haveAccount ? "Create one" : "Sign in"}
+              {haveAccount ? "Create one" : "Login"}
             </Button>
           </p>
         </div>
       </div>
-    </>
+    </div>
   );
 }
