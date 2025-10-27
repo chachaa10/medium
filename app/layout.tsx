@@ -5,6 +5,7 @@ import Header from "./components/layout/header";
 import { ThemeProvider } from "./components/theme-provider";
 import { SidebarProvider } from "./components/ui/sidebar";
 import { Toaster } from "./components/ui/sonner";
+import { getCurrentUser } from "./data/user";
 import "./global.css";
 
 const geistSans = Geist({
@@ -27,7 +28,8 @@ interface RootLayoutProps {
   readonly children: React.ReactNode;
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default async function RootLayout({ children }: RootLayoutProps) {
+  const session = await getCurrentUser();
   return (
     <html
       lang="en"
@@ -43,13 +45,20 @@ export default function RootLayout({ children }: RootLayoutProps) {
           disableTransitionOnChange
           storageKey="medium-theme"
         >
-          <SidebarProvider className="flex flex-col">
-            <Header />
-            <div className="flex pt-18">
-              <AppSidebar />
+          {session ? (
+            <SidebarProvider className="flex flex-col">
+              <Header />
+              <div className="flex pt-18">
+                <AppSidebar />
+                {children}
+              </div>
+            </SidebarProvider>
+          ) : (
+            <>
+              <Header />
               {children}
-            </div>
-          </SidebarProvider>
+            </>
+          )}
           <Toaster />
         </ThemeProvider>
       </body>

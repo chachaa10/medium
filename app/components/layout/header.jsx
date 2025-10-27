@@ -10,12 +10,16 @@ export default async function Header() {
 
   return (
     <header className="left-0 z-99 fixed flex justify-between items-center bg-background dark:bg-neutral-950 border-b w-full h-15">
-      <div className="flex items-center">
-        <SidebarToggle />
+      {session ? (
+        <div className="flex items-center">
+          <SidebarToggle />
+          <Logo />
+          <Search />
+        </div>
+      ) : (
         <Logo />
-        <Search />
-      </div>
-      <div className="flex gap-2">
+      )}
+      <div className="flex gap-2 pr-4">
         {session && <Logout />}
         <ThemeToggle />
       </div>
