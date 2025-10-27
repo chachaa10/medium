@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { AppSidebar } from "./components/app-sidebar";
 import Header from "./components/layout/header";
 import { ThemeProvider } from "./components/theme-provider";
 import { SidebarProvider } from "./components/ui/sidebar";
@@ -42,8 +43,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
           disableTransitionOnChange
           storageKey="medium-theme"
         >
-          <Header />
-          <div className="pt-18">{children}</div>
+          <SidebarProvider className="flex flex-col">
+            <Header />
+            <div className="flex pt-18">
+              <AppSidebar />
+              {children}
+            </div>
+          </SidebarProvider>
           <Toaster />
         </ThemeProvider>
       </body>

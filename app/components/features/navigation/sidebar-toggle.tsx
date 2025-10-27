@@ -1,18 +1,15 @@
 "use client";
 
 import { Button } from "@/app/components/ui/button";
+import { useSidebar } from "@/app/components/ui/sidebar";
 import { Menu } from "lucide-react";
-import { useState } from "react";
 
 export default function SidebarToggle() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { toggleSidebar } = useSidebar();
 
-  const handleSidebarToggle = () => {
-    setIsOpen(!isOpen);
-  };
   return (
     <Button
-      onClick={handleSidebarToggle}
+      onClick={toggleSidebar}
       variant={"link"}
       className="cursor-pointer"
     >

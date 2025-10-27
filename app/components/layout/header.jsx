@@ -9,7 +9,7 @@ export default async function Header() {
   const session = await getCurrentUser();
 
   return (
-    <header className="left-0 z-99 fixed flex justify-between items-center bg-background dark:bg-neutral-900 border-b w-full h-15">
+    <header className="left-0 z-99 fixed flex justify-between items-center bg-background dark:bg-neutral-950 border-b w-full h-15">
       <div className="flex items-center">
         <SidebarToggle />
         <Logo />
