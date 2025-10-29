@@ -11,7 +11,7 @@ export default async function Header() {
   return (
     <header className="left-0 z-99 fixed flex justify-between items-center bg-background dark:bg-neutral-950 border-b w-full h-15">
       {session ? (
-        <div className="flex items-center">
+        <div className="flex items-center gap-2">
           <SidebarToggle />
           <Logo />
           <Search />

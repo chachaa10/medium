@@ -1,16 +1,9 @@
-"use client";
-import { Button } from "@/app/components/ui/button";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Logo() {
-  const router = useRouter();
   return (
-    <Button
-      onClick={() => router.push("/")}
-      variant={"link"}
-      className="hover:no-underline cursor-pointer"
-    >
+    <Link href="/">
       <h1 className="font-bold text-3xl">Medium</h1>
-    </Button>
+    </Link>
   );
 }
