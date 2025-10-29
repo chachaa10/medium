@@ -1,8 +1,8 @@
 "use client";
 
+import BetterAuthActionButton from "@/app/components/features/auth/better-auth-action-button";
+import { authClient } from "@/app/lib/auth-client";
 import { useRouter } from "next/navigation";
-import { authClient } from "../lib/auth-client";
-import BetterAuthActionButton from "./features/auth/better-auth-action-button";
 
 export default function Logout() {
   const router = useRouter();

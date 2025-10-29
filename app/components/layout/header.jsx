@@ -1,8 +1,8 @@
-import Logo from "@/app/components/features/navigation/logo";
-import Search from "@/app/components/features/navigation/search";
-import SidebarToggle from "@/app/components/features/navigation/sidebar-toggle";
-import Logout from "@/app/components/logout-button";
-import { ThemeToggle } from "@/app/components/theme-button";
+import Logo from "@/app/components/features/navbar/logo";
+import Logout from "@/app/components/features/navbar/logout-button";
+import Search from "@/app/components/features/navbar/search";
+import SidebarToggle from "@/app/components/features/navbar/sidebar-toggle";
+import { ThemeToggle } from "@/app/components/features/navbar/theme-button";
 import { getCurrentUser } from "@/app/data/user";
 
 export default async function Header() {

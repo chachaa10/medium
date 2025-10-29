@@ -17,7 +17,7 @@ import {
   TooltipTrigger,
 } from "@/app/components/ui/tooltip";
 import { useIsMobile } from "@/app/lib/hooks/use-mobile";
-import { cn } from "@/app/utils/tailwind-merge";
+import { cn } from "@/app/lib/utils/tailwind-merge";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { PanelLeftIcon } from "lucide-react";

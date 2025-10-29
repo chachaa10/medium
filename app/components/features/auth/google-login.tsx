@@ -1,8 +1,8 @@
 "use client";
 
-import Google from "@/app/components/google-icon";
+import BetterAuthActionButton from "@/app/components/features/auth/better-auth-action-button";
+import Google from "@/app/components/features/auth/google-icon";
 import { authClient } from "@/app/lib/auth-client";
-import BetterAuthActionButton from "./better-auth-action-button";
 
 interface GoogleLoginProps {
   haveAccount: boolean;

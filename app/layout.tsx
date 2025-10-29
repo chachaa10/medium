@@ -1,11 +1,11 @@
+import { ThemeProvider } from "@/app/components/features/navbar/theme-provider";
+import { AppSidebar } from "@/app/components/features/sidebar/app-sidebar";
+import Header from "@/app/components/layout/header";
+import { SidebarProvider } from "@/app/components/ui/sidebar";
+import { Toaster } from "@/app/components/ui/sonner";
+import { getCurrentUser } from "@/app/data/user";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { AppSidebar } from "./components/app-sidebar";
-import Header from "./components/layout/header";
-import { ThemeProvider } from "./components/theme-provider";
-import { SidebarProvider } from "./components/ui/sidebar";
-import { Toaster } from "./components/ui/sonner";
-import { getCurrentUser } from "./data/user";
 import "./global.css";
 
 const geistSans = Geist({
@@ -54,6 +54,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
               </div>
             </SidebarProvider>
           ) : (
+            // if user is not logged in
             <>
               <Header />
               {children}

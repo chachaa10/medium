@@ -1,5 +1,13 @@
 "use client";
 
+import { Button } from "@/app/components/ui/button";
+import { Input } from "@/app/components/ui/input";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/app/components/ui/tooltip";
+import { cn } from "@/app/lib/utils/tailwind-merge";
 import { zxcvbn, zxcvbnOptions } from "@zxcvbn-ts/core";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import {
@@ -13,14 +21,6 @@ import {
   useMemo,
   useState,
 } from "react";
-import { Button } from "@/app/components/ui/button";
-import { Input } from "@/app/components/ui/input";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/app/components/ui/tooltip";
-import { cn } from "@/app/utils/tailwind-merge";
 
 const PasswordInputContext = createContext<{ password: string } | null>(null);
 
@@ -150,17 +150,17 @@ export function PasswordInputStrengthChecker() {
             strengthResult.score === 2
               ? "bg-yellow-500"
               : strengthResult.score === 3
-                ? "bg-green-400"
-                : strengthResult.score === 4
-                  ? "bg-green-500"
-                  : "bg-destructive";
+              ? "bg-green-400"
+              : strengthResult.score === 4
+              ? "bg-green-500"
+              : "bg-destructive";
 
           return (
             <div
               key={i}
               className={cn(
                 "flex-1 rounded-full h-1",
-                strengthResult.score > i ? color : "bg-secondary",
+                strengthResult.score > i ? color : "bg-secondary"
               )}
             />
           );
@@ -174,7 +174,11 @@ export function PasswordInputStrengthChecker() {
             <TooltipTrigger className="underline underline-offset-1">
               {label}
             </TooltipTrigger>
-            <TooltipContent side="bottom" sideOffset={4} className="text-base">
+            <TooltipContent
+              side="bottom"
+              sideOffset={4}
+              className="text-base"
+            >
               {strengthResult.feedback.warning}
             </TooltipContent>
           </Tooltip>
@@ -188,7 +192,7 @@ const usePasswordInput = () => {
   const context = useContext(PasswordInputContext);
   if (context == null) {
     throw new Error(
-      "usePasswordInput must be used within a PasswordInputContext",
+      "usePasswordInput must be used within a PasswordInputContext"
     );
   }
   return context;

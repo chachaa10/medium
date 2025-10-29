@@ -7,9 +7,11 @@ export default async function PostList() {
     <>
       {posts.map((post) => (
         <div key={post.id}>
-          <h2>{post.title}</h2>
-          <p>{post.content}</p>
-          <p>Author: {getAuthorName(post.authorId)}</p>
+          <h2 className="font-semibold text-xl">{post.title}</h2>
+          <p className="italic">Author: {getAuthorName(post.authorId)}</p>
+          <p className="text-neutral-800 dark:text-neutral-300">
+            {post.content}
+          </p>
         </div>
       ))}
     </>

@@ -3,7 +3,7 @@
 import * as LabelPrimitive from "@radix-ui/react-label";
 import type * as React from "react";
 
-import { cn } from "@/app/utils/tailwind-merge";
+import { cn } from "@/app/lib/utils/tailwind-merge";
 
 function Label({
   className,
@@ -14,7 +14,7 @@ function Label({
       data-slot="label"
       className={cn(
         "flex items-center gap-2 group-data-[disabled=true]:opacity-50 peer-disabled:opacity-50 font-medium text-sm leading-none peer-disabled:cursor-not-allowed group-data-[disabled=true]:pointer-events-none select-none",
-        className,
+        className
       )}
       {...props}
     />
