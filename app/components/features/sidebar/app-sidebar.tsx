@@ -21,13 +21,18 @@ const data = {
       icon: Home,
       isActive: false,
     },
-    { title: "Library", url: "#", icon: Bookmark, isActive: false },
-    { title: "Profile", url: "#", icon: User, isActive: false },
-    { title: "Stories", url: "#", icon: BookOpenText, isActive: false },
-    { title: "Stats", url: "#", icon: ChartColumnStacked, isActive: false },
+    { title: "Library", url: "/library", icon: Bookmark, isActive: false },
+    { title: "Profile", url: "/profile", icon: User, isActive: false },
+    { title: "Stories", url: "/stories", icon: BookOpenText, isActive: false },
+    {
+      title: "Stats",
+      url: "/stats",
+      icon: ChartColumnStacked,
+      isActive: false,
+    },
   ],
   navSecondary: [
-    { title: "Followings", url: "#", icon: Users, isActive: false },
+    { title: "Followings", url: "/followings", icon: Users, isActive: false },
   ],
 };
 

@@ -7,6 +7,7 @@ import {
   SidebarMenuItem,
 } from "@/app/components/ui/sidebar";
 import type { LucideIcon } from "lucide-react";
+import type { Route } from "next";
 import Link from "next/link";
 
 export function Nav({
@@ -33,7 +34,7 @@ export function Nav({
               tooltip={item.title}
             >
               <Link
-                href={item.url}
+                href={item.url as Route}
                 className="flex items-center gap-4"
               >
                 <item.icon />
