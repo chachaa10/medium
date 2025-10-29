@@ -17,7 +17,7 @@ export default async function Header() {
           <Search />
         </div>
       ) : (
-        <Logo />
+        <Logo className="ml-4" />
       )}
       <div className="flex gap-2 pr-4">
         {session && <Logout />}
