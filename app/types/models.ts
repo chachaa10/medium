@@ -144,6 +144,13 @@ export const ClapSchema = z.object({
   createdAt: timestamp,
 });
 
+export const LikeSchema = ClapSchema.pick({
+  postId: true,
+  userId: true,
+  createdAt: true,
+  clapCount: true,
+});
+
 export const CommentSchema = z.object({
   id,
   postId: id,

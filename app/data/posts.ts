@@ -1,6 +1,6 @@
 "use server";
 
-import { getCurrentUser } from "@/app/data/user";
+import { getCurrentUser } from "@/app/data/users";
 import type {
   Post,
   PostCreate,

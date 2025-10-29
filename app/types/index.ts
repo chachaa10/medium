@@ -18,6 +18,7 @@ export type PostSoftDeleteRequest = z.infer<
 export type Tag = z.infer<typeof t.TagSchema>;
 export type PostTag = z.infer<typeof t.PostTagSchema>;
 export type Clap = z.infer<typeof t.ClapSchema>;
+export type Like = z.infer<typeof t.LikeSchema>;
 export type Comment = z.infer<typeof t.CommentSchema>;
 export type Follow = z.infer<typeof t.FollowSchema>;
 export type Bookmark = z.infer<typeof t.BookmarkSchema>;

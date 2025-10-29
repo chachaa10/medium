@@ -3,7 +3,7 @@ import Logout from "@/app/components/features/navbar/logout-button";
 import Search from "@/app/components/features/navbar/search";
 import SidebarToggle from "@/app/components/features/navbar/sidebar-toggle";
 import { ThemeToggle } from "@/app/components/features/navbar/theme-button";
-import { getCurrentUser } from "@/app/data/user";
+import { getCurrentUser } from "@/app/data/users";
 
 export default async function Header() {
   const session = await getCurrentUser();

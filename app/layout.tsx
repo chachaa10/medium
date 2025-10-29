@@ -3,7 +3,7 @@ import { AppSidebar } from "@/app/components/features/sidebar/app-sidebar";
 import Header from "@/app/components/layout/header";
 import { SidebarProvider } from "@/app/components/ui/sidebar";
 import { Toaster } from "@/app/components/ui/sonner";
-import { getCurrentUser } from "@/app/data/user";
+import { getCurrentUser } from "@/app/data/users";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./global.css";
