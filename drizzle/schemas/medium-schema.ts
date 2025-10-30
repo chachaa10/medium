@@ -50,7 +50,7 @@ export const users = pgTable(
     return {
       emailIdx: uniqueIndex("idx_users_email").on(table.email),
     };
-  }
+  },
 );
 
 export const sessions = pgTable("sessions", {
@@ -96,11 +96,11 @@ export const accounts = pgTable(
     return {
       providerAccountUnique: unique("uq_accounts_provider_account").on(
         table.providerId,
-        table.accountId
+        table.accountId,
       ),
       userIdIdx: index("idx_accounts_user_id").on(table.userId),
     };
-  }
+  },
 );
 
 /**
@@ -129,7 +129,6 @@ export const posts = pgTable(
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
     title: varchar("title", { length: 255 }).notNull(),
-    subtitle: varchar("subtitle", { length: 255 }),
     content: text("content").notNull(),
     slug: varchar("slug", { length: 255 }).unique(),
     status: postStatus("status").notNull().default("draft"),
@@ -143,7 +142,7 @@ export const posts = pgTable(
       authorIdIdx: index("idx_posts_author_id").on(table.authorId),
       publishedAtIdx: index("idx_posts_published_at").on(table.publishedAt),
     };
-  }
+  },
 );
 
 export const tags = pgTable("tags", {
@@ -171,7 +170,7 @@ export const postTags = pgTable(
       postIdIdx: index("idx_post_tags_post_id").on(table.postId),
       tagIdIdx: index("idx_post_tags_tag_id").on(table.tagId),
     };
-  }
+  },
 );
 
 /**
@@ -194,12 +193,12 @@ export const claps = pgTable(
     return {
       uniquePostUser: unique("unique_clap_post_user").on(
         table.postId,
-        table.userId
+        table.userId,
       ),
       postIdIdx: index("idx_claps_post_id").on(table.postId),
       userIdIdx: index("idx_claps_user_id").on(table.userId),
     };
-  }
+  },
 );
 
 /**
@@ -228,7 +227,7 @@ export const comments = pgTable(
       userIdIdx: index("idx_comments_user_id").on(table.userId),
       parentIdIdx: index("idx_comments_parent_id").on(table.parentId),
     };
-  }
+  },
 );
 
 /**
@@ -250,12 +249,12 @@ export const follows = pgTable(
     return {
       uniqueFollow: unique("unique_follower_followee").on(
         table.followerId,
-        table.followeeId
+        table.followeeId,
       ),
       followerIdIdx: index("idx_follows_follower_id").on(table.followerId),
       followeeIdIdx: index("idx_follows_followee_id").on(table.followeeId),
     };
-  }
+  },
 );
 
 /**
@@ -277,10 +276,10 @@ export const bookmarks = pgTable(
     return {
       uniqueBookmark: unique("unique_bookmark_user_post").on(
         table.userId,
-        table.postId
+        table.postId,
       ),
       userIdIdx: index("idx_bookmarks_user_id").on(table.userId),
       postIdIdx: index("idx_bookmarks_post_id").on(table.postId),
     };
-  }
+  },
 );

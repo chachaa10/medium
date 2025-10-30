@@ -32,7 +32,7 @@ export const UserSignupSchema = UserSchema.pick({
     .min(6, "Password must be at least 6 characters long")
     .regex(
       /^(?=.*[a-zA-Z])(?=.*\d).+$/,
-      "Password must contain at least one letter and one number"
+      "Password must contain at least one letter and one number",
     )
     .max(100, "Password must be at most 100 characters long"),
 });
@@ -71,7 +71,6 @@ export const PostSchema = z.object({
   id: id,
   authorId: id,
   title: z.string(),
-  subtitle: z.string().optional().nullable(),
   content: z.string(),
   slug: z.string().optional().nullable(),
   status: PostStatusEnum,
@@ -88,7 +87,6 @@ export const PostCreateSchema = PostSchema.omit({
   deletedAt: true,
 }).extend({
   title: z.string().min(1, "Title is required.").max(255, "Title is too long."),
-  subtitle: z.string().max(255).optional().nullable(),
   content: z.string().min(1, "Content is required."),
   slug: z.string().max(255).optional().nullable(),
   publishedAt: z.never().optional(), // Should be set separately or by a service
@@ -97,14 +95,12 @@ export const PostCreateSchema = PostSchema.omit({
 export const PostUpdateBaseSchema = PostSchema.pick({
   id: true,
   title: true,
-  subtitle: true,
   content: true,
   slug: true,
 });
 
 export const PostUpdateSchema = PostUpdateBaseSchema.pick({
   title: true,
-  subtitle: true,
   content: true,
   slug: true,
 })
