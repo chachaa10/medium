@@ -1,5 +1,7 @@
-import { getCurrentUser } from "@/app/data/users";
+import Tiptap from "@/app/components/features/tiptap";
+import SubmitPostButton from "@/app/components/features/tiptap/submit-post-button";
 import { redirect } from "next/navigation";
+import { getCurrentUser } from "../data/users";
 
 export default async function NewPostPage() {
   const session = await getCurrentUser();
@@ -9,8 +11,10 @@ export default async function NewPostPage() {
   }
 
   return (
-    <main>
-      <h1>New Post</h1>
+    <main className="space-y-4 mx-auto p-4 w-full max-w-[80ch]">
+      <Tiptap />
+
+      <SubmitPostButton className="py-4 rounded-md w-full font-semibold uppercase cursor-pointer" />
     </main>
   );
 }
