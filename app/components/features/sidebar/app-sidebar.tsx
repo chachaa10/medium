@@ -38,11 +38,8 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar
-      className="top-15"
-      {...props}
-    >
-      <SidebarContent className="bg-background dark:bg-neutral-950">
+    <Sidebar className="" {...props}>
+      <SidebarContent className="bg-background dark:bg-neutral-950 pt-15">
         <Nav items={data.navMain} />
         <Separator />
         <Nav items={data.navSecondary} />
