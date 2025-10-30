@@ -1,3 +1,3 @@
 export default function PostSkeleton() {
-  return null;
+  return <div className="animate-pulse">Loading...</div>;
 }

@@ -1,5 +1,5 @@
+import { getCurrentUser } from "@/app/data/users";
 import { redirect } from "next/navigation";
-import { getCurrentUser } from "../data/users";
 
 export default async function NewPostPage() {
   const session = await getCurrentUser();

@@ -1,6 +1,10 @@
+import PostList from "@/app/components/features/post/post-list";
+import PostSkeleton from "@/app/components/features/post/skeleton";
+import { Button } from "@/app/components/ui/button";
 import { getCurrentUser } from "@/app/data/users";
+import Link from "next/link";
 import { redirect } from "next/navigation";
-import PostList from "./components/features/post/post-list";
+import { Suspense } from "react";
 
 export default async function HomePage() {
   const session = await getCurrentUser();
@@ -10,13 +14,18 @@ export default async function HomePage() {
   }
 
   return (
-    <main className="mx-auto p-2 max-w-[80ch] container">
+    <main className="mx-auto p-2 w-full max-w-[80ch] container">
       <h1 className="font-bold text-4xl">Home Page</h1>
-      {session && (
-        <h1 className="font-semibold text-lg">{session?.user.name}</h1>
-      )}
+      <Button
+        asChild={true}
+        className="bg-green-700 hover:bg-green-800 text-neutral-50"
+      >
+        <Link href="/new-post">New Post</Link>
+      </Button>
 
-      <PostList />
+      <Suspense fallback={<PostSkeleton />}>
+        <PostList />
+      </Suspense>
     </main>
   );
 }
