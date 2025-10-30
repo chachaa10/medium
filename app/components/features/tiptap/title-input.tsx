@@ -1,3 +1,4 @@
+"use client";
 import { Input } from "@/app/components/ui/input";
 
 export default function TitleInput() {

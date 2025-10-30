@@ -1,5 +1,4 @@
 "use client";
-
 import MenuBar from "@/app/components/features/tiptap/menu-bar";
 import Typography from "@tiptap/extension-typography";
 import { useEditor, EditorContent } from "@tiptap/react";

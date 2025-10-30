@@ -1,3 +1,4 @@
+"use client";
 import { Toggle } from "@/app/components/ui/toggle";
 import type { Editor } from "@tiptap/react";
 import {
