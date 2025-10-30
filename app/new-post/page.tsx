@@ -1,4 +1,4 @@
-import Tiptap from "@/app/components/features/tiptap";
+import { Tiptap } from "@/app/components/features/tiptap";
 import SubmitPostButton from "@/app/components/features/tiptap/submit-post-button";
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "../data/users";

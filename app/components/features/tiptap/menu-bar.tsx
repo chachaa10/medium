@@ -23,7 +23,7 @@ interface MenuBarProps {
   editor: Editor;
 }
 export default function MenuBar({ editor }: MenuBarProps) {
-  const iconSize = "size-6 ";
+  const iconSize = "size-6";
 
   const Options = [
     {
@@ -57,12 +57,6 @@ export default function MenuBar({ editor }: MenuBarProps) {
       pressed: editor.isActive("blockquote"),
     },
     {
-      icon: <Heading1 className={iconSize} />,
-      onClick: () => editor.chain().focus().toggleHeading({ level: 1 }).run(),
-      pressed: editor.isActive("heading", { level: 1 }),
-    },
-
-    {
       icon: <Heading2 className={iconSize} />,
       onClick: () => editor.chain().focus().toggleHeading({ level: 2 }).run(),
       pressed: editor.isActive("heading", { level: 2 }),
@@ -76,16 +70,6 @@ export default function MenuBar({ editor }: MenuBarProps) {
       icon: <Heading4 className={iconSize} />,
       onClick: () => editor.chain().focus().toggleHeading({ level: 4 }).run(),
       pressed: editor.isActive("heading", { level: 4 }),
-    },
-    {
-      icon: <Heading5 className={iconSize} />,
-      onClick: () => editor.chain().focus().toggleHeading({ level: 5 }).run(),
-      pressed: editor.isActive("heading", { level: 5 }),
-    },
-    {
-      icon: <Heading6 className={iconSize} />,
-      onClick: () => editor.chain().focus().toggleHeading({ level: 6 }).run(),
-      pressed: editor.isActive("heading", { level: 6 }),
     },
     {
       icon: <List className={iconSize} />,
@@ -110,7 +94,7 @@ export default function MenuBar({ editor }: MenuBarProps) {
   ];
 
   return (
-    <div className="flex flex-row flex-wrap gap-2">
+    <div className="top-15 z-10 sticky flex flex-row flex-wrap gap-2 bg-white dark:bg-neutral-950 prose-stone">
       {Options.map((option, index) => (
         <Toggle
           className="cursor-pointer"
