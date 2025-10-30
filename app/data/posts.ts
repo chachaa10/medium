@@ -6,7 +6,7 @@ import type {
   PostCreate,
   PostSoftDeleteRequest,
   PostUpdate,
-} from "@/app/types";
+} from "@/app/lib/types";
 import { db } from "@/drizzle/db";
 import { posts } from "@/drizzle/schema";
 import { and, eq, isNull } from "drizzle-orm";

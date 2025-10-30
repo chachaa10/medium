@@ -13,8 +13,8 @@ import { Input } from "@/app/components/ui/input";
 import { LoadingSwap } from "@/app/components/ui/loading-swap";
 import { PasswordInput } from "@/app/components/ui/password-input";
 import { authClient } from "@/app/lib/auth-client";
-import type { UserSignin, UserSignup } from "@/app/types";
-import { UserSigninSchema, UserSignupSchema } from "@/app/types/models";
+import type { UserSignin, UserSignup } from "@/app/lib/types";
+import { UserSigninSchema, UserSignupSchema } from "@/app/lib/types/models";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -60,7 +60,7 @@ export default function AuthForm(props: AuthFormProps) {
         onSuccess: () => {
           window.location.replace("/");
         },
-      }
+      },
     );
   }
 
@@ -78,16 +78,13 @@ export default function AuthForm(props: AuthFormProps) {
         onSuccess: () => {
           window.location.replace("/");
         },
-      }
+      },
     );
   }
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-4"
-      >
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         {!haveAccount && (
           <FormField
             control={form.control}
@@ -110,10 +107,7 @@ export default function AuthForm(props: AuthFormProps) {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="email@example.com"
-                  {...field}
-                />
+                <Input placeholder="email@example.com" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -133,11 +127,7 @@ export default function AuthForm(props: AuthFormProps) {
           )}
         />
 
-        <Button
-          type="submit"
-          className="w-full"
-          disabled={isSubmitting}
-        >
+        <Button type="submit" className="w-full" disabled={isSubmitting}>
           <LoadingSwap isLoading={isSubmitting}>
             {haveAccount ? "Login" : "Sign Up"}
           </LoadingSwap>
