@@ -13,7 +13,7 @@ export const Tiptap = memo(() => {
     editorProps: {
       attributes: {
         class:
-          "prose dark:prose-invert prose-sm sm:prose-base min-h-[400px] space-y-4 border border-gray-300 p-2 rounded-md min-w-full focus:outline-none prose-h2:text-xl prose-h3:text-lg prose-h4:text-md prose-p:text-base prose-p:text-neutral-900 dark:prose-p:text-neutral-200",
+          "prose dark:prose-invert prose-sm sm:prose-base min-h-[400px] space-y-4 border border-gray-300 p-4 rounded-md min-w-full focus:outline-none prose-h2:text-xl prose-h3:text-lg prose-h4:text-md prose-p:text-base prose-p:text-neutral-900 dark:prose-p:text-neutral-200",
       },
     },
   });

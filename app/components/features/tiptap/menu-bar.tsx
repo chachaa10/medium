@@ -94,7 +94,7 @@ export default function MenuBar({ editor }: MenuBarProps) {
   ];
 
   return (
-    <div className="top-15 z-10 sticky flex flex-row flex-wrap gap-2 bg-white dark:bg-neutral-950 prose-stone">
+    <div className="top-15 z-10 sticky flex flex-row flex-wrap gap-2 bg-white dark:bg-neutral-950 py-2 prose-stone">
       {Options.map((option, index) => (
         <Toggle
           className="cursor-pointer"
