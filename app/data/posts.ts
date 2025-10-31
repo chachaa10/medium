@@ -2,6 +2,7 @@
 
 import { and, eq, isNull } from "drizzle-orm";
 import { redirect } from "next/navigation";
+import { getAuthorName } from "@/app/data/authors";
 import { getCurrentUser } from "@/app/data/users";
 import type {
   Post,
@@ -14,7 +15,6 @@ import randomStringGenerator from "@/app/lib/utils/random-string-generator";
 import { slugify } from "@/app/lib/utils/slugify";
 import { db } from "@/drizzle/db";
 import { posts } from "@/drizzle/schema";
-import { getAuthorName } from "./authors";
 
 export async function getPosts(): Promise<Post[]> {
   try {

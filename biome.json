@@ -20,7 +20,9 @@
     "rules": {
       "recommended": true,
       "suspicious": {
-        "noUnknownAtRules": "off"
+        "noUnknownAtRules": "off",
+        "noDoubleEquals": "error",
+        "noArrayIndexKey": "warn"
       }
     },
     "domains": {
@@ -32,6 +34,8 @@
     "actions": {
       "source": {
         "organizeImports": "on",
+        "useSortedAttributes": "on",
+        "useSortedProperties": "on",
         "recommended": true
       },
       "recommended": true
