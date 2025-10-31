@@ -34,14 +34,20 @@ export default function NewPostPage() {
     <main className="space-y-4 mx-auto p-4 w-full max-w-[80ch]">
       <RichTextEditor post={post} onChange={handleOnChange} />
 
-      <SubmitPostButton
-        action={async () => {
-          const newPost = await createPost(post);
-          const authorName = await getAuthorName(newPost.authorId);
-          router.push(`/@${authorName}/${newPost.slug}`);
-        }}
-        className="py-4 rounded-md w-full font-semibold uppercase cursor-pointer"
-      />
+      <div className="gap-4 grid grid-cols-2">
+        <Button
+          asChild
+          className="bg-rose-600 hover:bg-rose-700/80 text-white cursor-pointer"
+        >
+          <Link href="/">Cancel</Link>
+        </Button>
+        <SubmitPostButton
+          action={() => {
+            return createPost(post);
+          }}
+          className="bg-blue-600 hover:bg-blue-700/80 py-4 rounded-md font-semibold text-white cursor-pointer"
+        />
+      </div>
     </main>
   );
 }

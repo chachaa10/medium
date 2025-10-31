@@ -17,7 +17,7 @@ export default async function HomePage() {
     <main className="mx-auto p-2 w-full max-w-[80ch] container">
       <h1 className="font-bold text-4xl">Home Page</h1>
       <Button
-        asChild={true}
+        asChild
         className="bg-green-700 hover:bg-green-800 text-neutral-50"
       >
         <Link href="/new-post">New Post</Link>
