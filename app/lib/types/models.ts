@@ -72,7 +72,7 @@ export const PostSchema = z.object({
   authorId: id,
   title: z.string(),
   content: z.string(),
-  slug: z.string().optional().nullable(),
+  slug: z.string(),
   status: PostStatusEnum,
   publishedAt: optionalTimestamp,
   deletedAt: optionalTimestamp,
@@ -88,7 +88,7 @@ export const PostCreateSchema = PostSchema.omit({
 }).extend({
   title: z.string().min(1, "Title is required.").max(255, "Title is too long."),
   content: z.string().min(1, "Content is required."),
-  slug: z.string().max(255).optional().nullable(),
+  slug: z.string().min(1, "Slug is required.").max(255),
   publishedAt: z.never().optional(), // Should be set separately or by a service
 });
 
@@ -96,13 +96,13 @@ export const PostUpdateBaseSchema = PostSchema.pick({
   id: true,
   title: true,
   content: true,
-  slug: true,
+  status: true,
 });
 
 export const PostUpdateSchema = PostUpdateBaseSchema.pick({
   title: true,
   content: true,
-  slug: true,
+  status: true,
 })
   .partial()
   .extend({

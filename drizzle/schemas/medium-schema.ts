@@ -130,7 +130,7 @@ export const posts = pgTable(
       .references(() => users.id, { onDelete: "cascade" }),
     title: varchar("title", { length: 255 }).notNull(),
     content: text("content").notNull(),
-    slug: varchar("slug", { length: 255 }).unique(),
+    slug: varchar("slug", { length: 255 }).notNull().unique(),
     status: postStatus("status").notNull().default("draft"),
     publishedAt: timestamp("published_at", { withTimezone: true }),
     deletedAt,
