@@ -8,13 +8,13 @@ export default function SubmitPostButton({
   action,
 }: {
   className?: string;
-  action: () => Promise<void>;
+  action: () => void;
 }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  async function handleSubmit() {
+  function handleSubmit() {
     setIsSubmitting(true);
-    await action();
+    action();
     setIsSubmitting(false);
   }
 

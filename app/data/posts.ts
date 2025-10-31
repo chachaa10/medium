@@ -1,6 +1,7 @@
 "use server";
 
 import { and, eq, isNull } from "drizzle-orm";
+import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/app/data/users";
 import type {
   Post,
@@ -13,6 +14,7 @@ import randomStringGenerator from "@/app/lib/utils/random-string-generator";
 import { slugify } from "@/app/lib/utils/slugify";
 import { db } from "@/drizzle/db";
 import { posts } from "@/drizzle/schema";
+import { getAuthorName } from "./authors";
 
 export async function getPosts(): Promise<Post[]> {
   try {
@@ -50,9 +52,8 @@ export async function getPostBySlug(slug: string): Promise<Post> {
   }
 }
 
-export async function createPost(
-  data: Omit<PostCreate, "authorId" | "slug">,
-): Promise<Post> {
+export async function createPost(data: Omit<PostCreate, "authorId" | "slug">) {
+  let response: Post | undefined;
   try {
     const session = await getCurrentUser();
     if (!session?.user?.id) throw new Error("Unauthorized");
@@ -64,14 +65,17 @@ export async function createPost(
       slug: `${slug}-${randomStringGenerator(12)}`,
     });
 
-    const response = await db.insert(posts).values(validatedPost).returning();
-    if (!response[0]) throw new Error("Failed to create post");
-
-    return response[0];
+    const result = await db.insert(posts).values(validatedPost).returning();
+    if (!result[0]) throw new Error("Failed to create post");
+    response = result[0];
   } catch (error) {
     console.error("Database Error Creating Post:", error);
     throw new Error("Database Error");
   }
+
+  const author = await getAuthorName(response.authorId);
+  const formattedAuthorName = author.replace(" ", "").toLowerCase();
+  redirect(`/@${formattedAuthorName}/${response.slug}`);
 }
 
 export async function updatePost(data: PostUpdate) {

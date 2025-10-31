@@ -1,8 +1,10 @@
 "use client";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import RichTextEditor from "@/app/components/features/rich-text-editor";
 import SubmitPostButton from "@/app/components/features/rich-text-editor/submit-post-button";
+import { Button } from "../components/ui/button";
 import { getAuthorName } from "../data/authors";
 import { createPost } from "../data/posts";
 import { authClient } from "../lib/auth-client";
@@ -19,12 +21,18 @@ export default function NewPostPage() {
     content: "",
     status: "draft",
   });
-  const router = useRouter();
+
+  const { data: session, isPending: loading } = authClient.useSession();
 
   useEffect(() => {
-    const session = authClient.getSession();
-    if (!session) router.push("/login");
-  }, [router]);
+    if (!session && !loading) {
+      redirect("/login");
+    }
+  }, [session, loading]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   function handleOnChange(post: Post) {
     setPost(post);
