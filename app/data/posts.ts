@@ -51,7 +51,7 @@ export async function getPostBySlug(slug: string): Promise<Post> {
 }
 
 export async function createPost(
-  data: Omit<PostCreate, "authorId">,
+  data: Omit<PostCreate, "authorId" | "slug">,
 ): Promise<Post> {
   try {
     const session = await getCurrentUser();
