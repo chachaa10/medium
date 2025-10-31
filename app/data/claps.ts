@@ -13,7 +13,7 @@ export async function getCountClaps(postId: string) {
       .select()
       .from(claps)
       .where(eq(claps.postId, postId));
-    if (!response) throw new Error("No claps found");
+    if (!response || response.length === 0) return 0;
 
     return response[0].clapCount;
   } catch (error) {

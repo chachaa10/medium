@@ -5,18 +5,17 @@ import { LoadingSwap } from "@/app/components/ui/loading-swap";
 
 export default function SubmitPostButton({
   className,
+  action,
 }: {
   className?: string;
+  action: () => Promise<void>;
 }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  function handleSubmit() {
+  async function handleSubmit() {
     setIsSubmitting(true);
-
-    setTimeout(() => {
-      console.log("Submitting post...");
-      setIsSubmitting(false);
-    }, 2000);
+    await action();
+    setIsSubmitting(false);
   }
 
   return (

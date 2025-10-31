@@ -18,7 +18,7 @@ export default async function PostList() {
     <>
       {postsWithAuthor.map((post) => (
         <div className="my-4" key={post.id}>
-          <Link href={`/@${post.author}/${post.id}`}>
+          <Link href={`/@${post.author}/${post.slug}`}>
             <h2 className="font-semibold text-xl">{post.title}</h2>
             <p className="italic">Author: {getAuthorName(post.authorId)}</p>
             <p className="mt-2 text-neutral-800 dark:text-neutral-300">

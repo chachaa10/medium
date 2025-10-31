@@ -8,8 +8,8 @@ const nextConfig: NextConfig = {
         destination: "/:author",
       },
       {
-        source: "/@:author/:posts",
-        destination: "/:author/:posts",
+        source: "/@:author/:slug",
+        destination: "/:author/:slug",
       },
     ];
   },

@@ -8,6 +8,9 @@ import type {
   PostSoftDeleteRequest,
   PostUpdate,
 } from "@/app/lib/types";
+import { PostCreateSchema } from "@/app/lib/types/models";
+import randomStringGenerator from "@/app/lib/utils/random-string-generator";
+import { slugify } from "@/app/lib/utils/slugify";
 import { db } from "@/drizzle/db";
 import { posts } from "@/drizzle/schema";
 
@@ -29,7 +32,7 @@ export async function getPosts(): Promise<Post[]> {
   }
 }
 
-export async function getPostById(id: string): Promise<Post> {
+export async function getPostBySlug(slug: string): Promise<Post> {
   try {
     const session = await getCurrentUser();
     if (!session?.user?.id) throw new Error("Unauthorized");
@@ -37,23 +40,34 @@ export async function getPostById(id: string): Promise<Post> {
     const response = await db
       .select()
       .from(posts)
-      .where(and(eq(posts.id, id), isNull(posts.deletedAt)));
+      .where(and(eq(posts.slug, slug), isNull(posts.deletedAt)));
     if (response.length === 0) throw new Error("Post not found");
 
     return response[0];
   } catch (error) {
-    console.error("Database Error Fetching Post by ID:", error);
+    console.error("Database Error Fetching Post by Slug:", error);
     throw new Error("Database Error");
   }
 }
 
-export async function createPost(data: PostCreate) {
+export async function createPost(
+  data: Omit<PostCreate, "authorId">,
+): Promise<Post> {
   try {
     const session = await getCurrentUser();
     if (!session?.user?.id) throw new Error("Unauthorized");
 
-    const response = await db.insert(posts).values(data);
-    if (!response) throw new Error("Failed to create post");
+    const slug = slugify(data.title);
+    const validatedPost = PostCreateSchema.parse({
+      ...data,
+      authorId: session.user.id,
+      slug: `${slug}-${randomStringGenerator(12)}`,
+    });
+
+    const response = await db.insert(posts).values(validatedPost).returning();
+    if (!response[0]) throw new Error("Failed to create post");
+
+    return response[0];
   } catch (error) {
     console.error("Database Error Creating Post:", error);
     throw new Error("Database Error");
