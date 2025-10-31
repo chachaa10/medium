@@ -2,7 +2,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import { getCurrentUser } from "@/app/data/users";
 
 // Specify protected and public routes
-const protectedRoutes = ["/", "/new-post", "/[author]/[posts]"];
+const protectedRoutes = ["/", "/new-post", "/[author]/[slug]"];
 const publicRoutes = ["/login"];
 
 // TODO: fix this function
