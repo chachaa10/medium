@@ -1,6 +1,6 @@
+import { eq } from "drizzle-orm";
 import { db } from "@/drizzle/db";
 import { users } from "@/drizzle/schema";
-import { eq } from "drizzle-orm";
 
 export async function getAuthorName(foreignKey: string) {
   try {

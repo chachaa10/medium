@@ -1,8 +1,8 @@
 "use client";
-import MenuBar from "@/app/components/features/rich-text-editor/menu-bar";
 import Typography from "@tiptap/extension-typography";
-import { useEditor, EditorContent } from "@tiptap/react";
+import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import MenuBar from "@/app/components/features/rich-text-editor/menu-bar";
 import TitleTextArea from "@/app/components/features/rich-text-editor/title-textarea";
 
 interface RichTextEditorProps {

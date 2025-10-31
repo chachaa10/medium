@@ -1,9 +1,9 @@
 "use client";
+import { redirect } from "next/navigation";
+import { useState } from "react";
 import RichTextEditor from "@/app/components/features/rich-text-editor";
 import SubmitPostButton from "@/app/components/features/rich-text-editor/submit-post-button";
-import { redirect } from "next/navigation";
 import { authClient } from "../lib/auth-client";
-import { useState } from "react";
 
 export default function NewPostPage() {
   const [post, setPost] = useState("");

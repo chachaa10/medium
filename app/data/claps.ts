@@ -1,7 +1,7 @@
+import { eq } from "drizzle-orm";
 import type { Clap } from "@/app/lib/types";
 import { db } from "@/drizzle/db";
 import { claps } from "@/drizzle/schema";
-import { eq } from "drizzle-orm";
 import { getCurrentUser } from "./users";
 
 export async function getCountClaps(postId: string) {

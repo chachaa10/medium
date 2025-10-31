@@ -11,11 +11,7 @@ export default function HandClapIcon({ className }: HandClapIconProps) {
       className={className}
     >
       <title>Clap Hand</title>
-      <g
-        fill="currentColor"
-        fillRule="evenodd"
-        clipRule="evenodd"
-      >
+      <g fill="currentColor" fillRule="evenodd" clipRule="evenodd">
         <path d="M3.268 10.422a1.5 1.5 0 1 1 2.166-2.076L8.2 11.234a.5.5 0 1 1-.722.692L4.712 9.038a.5.5 0 0 0-.722.692l2.767 2.888a.5.5 0 0 1-.722.692z" />
         <path d="M4.02 8.316a1.5 1.5 0 1 1 2.166-2.075l2.767 2.888a.5.5 0 1 1-.722.692L5.464 6.932a.5.5 0 1 0-.722.692l2.767 2.888a.5.5 0 0 1-.722.692z" />
         <path d="M6.156 7.654A1.5 1.5 0 1 1 8.322 5.58l3.116 3.251a.5.5 0 1 1-.723.692L7.6 6.271a.5.5 0 1 0-.722.692L9.645 9.85a.5.5 0 1 1-.722.691z" />

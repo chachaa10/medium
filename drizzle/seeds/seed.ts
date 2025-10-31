@@ -1,4 +1,8 @@
 // Assuming your schema.ts is in the same directory or accessible via import
+
+import * as dotenv from "dotenv";
+import { drizzle } from "drizzle-orm/node-postgres";
+import { Pool } from "pg";
 import {
   accounts,
   bookmarks,
@@ -11,10 +15,6 @@ import {
   tags,
   users,
 } from "../schema";
-
-import * as dotenv from "dotenv";
-import { drizzle } from "drizzle-orm/node-postgres";
-import { Pool } from "pg";
 
 dotenv.config({ path: "./.env" });
 
@@ -74,8 +74,8 @@ function createMockPost(authorId: string) {
     status === "published"
       ? faker.date.past({ years: 1 })
       : status === "archived"
-      ? faker.date.past({ years: 2 })
-      : undefined;
+        ? faker.date.past({ years: 2 })
+        : undefined;
 
   return {
     // id is auto-generated
@@ -209,7 +209,7 @@ async function seed() {
       // Claps
       const clappers = faker.helpers.arrayElements(
         userIds.filter((id) => id !== userId),
-        { min: 1, max: CLAPS_PER_POST }
+        { min: 1, max: CLAPS_PER_POST },
       );
       clappers.forEach((clapperId) => {
         allClaps.push(createMockClap(insertedPost.id, clapperId));
@@ -224,7 +224,7 @@ async function seed() {
       // Comments (Parent Comments)
       const parentCommenters = faker.helpers.arrayElements(
         userIds.filter((id) => id !== userId),
-        { min: 1, max: COMMENTS_PER_POST }
+        { min: 1, max: COMMENTS_PER_POST },
       );
       for (const commenterId of parentCommenters) {
         const [insertedComment] = await db
@@ -243,7 +243,7 @@ async function seed() {
         if (faker.datatype.boolean(0.5)) {
           // 50% chance of a reply
           const replyCommenterId = faker.helpers.arrayElement(
-            userIds.filter((id) => id !== commenterId)
+            userIds.filter((id) => id !== commenterId),
           );
           await db
             .insert(comments)
@@ -251,8 +251,8 @@ async function seed() {
               createMockComment(
                 insertedPost.id,
                 replyCommenterId,
-                insertedComment.id
-              )
+                insertedComment.id,
+              ),
             );
         }
       }
@@ -261,7 +261,7 @@ async function seed() {
     // Follows
     const followees = faker.helpers.arrayElements(
       userIds.filter((id) => id !== userId),
-      { min: 0, max: FOLLOWS_PER_USER }
+      { min: 0, max: FOLLOWS_PER_USER },
     );
     followees.forEach((followeeId) => {
       allFollows.push({ followerId: userId, followeeId });
@@ -270,7 +270,7 @@ async function seed() {
     // Bookmarks (Other users bookmarking)
     const otherBookmarkers = faker.helpers.arrayElements(
       allPosts.map((p) => p.id),
-      { min: 0, max: BOOKMARKS_PER_USER }
+      { min: 0, max: BOOKMARKS_PER_USER },
     );
     otherBookmarkers.forEach((postId) => {
       allBookmarks.push({ userId: userId, postId: postId });
@@ -285,7 +285,7 @@ async function seed() {
   const uniquePostTags = allPostTags.filter(
     (tag, index, self) =>
       index ===
-      self.findIndex((t) => t.postId === tag.postId && t.tagId === tag.tagId)
+      self.findIndex((t) => t.postId === tag.postId && t.tagId === tag.tagId),
   );
   if (uniquePostTags.length > 0) {
     await db.insert(postTags).values(uniquePostTags);
@@ -298,8 +298,8 @@ async function seed() {
     (clap, index, self) =>
       index ===
       self.findIndex(
-        (c) => c.postId === clap.postId && c.userId === clap.userId
-      )
+        (c) => c.postId === clap.postId && c.userId === clap.userId,
+      ),
   );
   if (uniqueClaps.length > 0) {
     await db.insert(claps).values(uniqueClaps);
@@ -314,8 +314,8 @@ async function seed() {
       self.findIndex(
         (f) =>
           f.followerId === follow.followerId &&
-          f.followeeId === follow.followeeId
-      )
+          f.followeeId === follow.followeeId,
+      ),
   );
   if (uniqueFollows.length > 0) {
     await db.insert(follows).values(uniqueFollows);
@@ -328,8 +328,8 @@ async function seed() {
     (bookmark, index, self) =>
       index ===
       self.findIndex(
-        (b) => b.userId === bookmark.userId && b.postId === bookmark.postId
-      )
+        (b) => b.userId === bookmark.userId && b.postId === bookmark.postId,
+      ),
   );
   if (uniqueBookmarks.length > 0) {
     await db.insert(bookmarks).values(uniqueBookmarks);

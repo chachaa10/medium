@@ -1,11 +1,11 @@
 "use client";
 
+import { redirect } from "next/navigation";
+import { useEffect, useState } from "react";
 import AuthForm from "@/app/components/features/auth/auth-form";
 import GoogleLogin from "@/app/components/features/auth/google-login";
 import { Button } from "@/app/components/ui/button";
 import { authClient } from "@/app/lib/auth-client";
-import { redirect } from "next/navigation";
-import { useEffect, useState } from "react";
 
 export default function LoginPage() {
   const [haveAccount, setHaveAccount] = useState(true);

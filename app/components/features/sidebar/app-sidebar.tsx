@@ -1,8 +1,5 @@
 "use client";
 
-import { Nav } from "@/app/components/features/sidebar/nav-main";
-import { Separator } from "@/app/components/ui/separator";
-import { Sidebar, SidebarContent } from "@/app/components/ui/sidebar";
 import {
   Bookmark,
   BookOpenText,
@@ -12,6 +9,9 @@ import {
   Users,
 } from "lucide-react";
 import type * as React from "react";
+import { Nav } from "@/app/components/features/sidebar/nav-main";
+import { Separator } from "@/app/components/ui/separator";
+import { Sidebar, SidebarContent } from "@/app/components/ui/sidebar";
 
 const data = {
   navMain: [

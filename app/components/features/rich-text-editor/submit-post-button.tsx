@@ -1,7 +1,7 @@
 "use client";
+import { useState } from "react";
 import { Button } from "@/app/components/ui/button";
 import { LoadingSwap } from "@/app/components/ui/loading-swap";
-import { useState } from "react";
 
 export default function SubmitPostButton({
   className,

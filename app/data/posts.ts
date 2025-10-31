@@ -1,5 +1,6 @@
 "use server";
 
+import { and, eq, isNull } from "drizzle-orm";
 import { getCurrentUser } from "@/app/data/users";
 import type {
   Post,
@@ -9,7 +10,6 @@ import type {
 } from "@/app/lib/types";
 import { db } from "@/drizzle/db";
 import { posts } from "@/drizzle/schema";
-import { and, eq, isNull } from "drizzle-orm";
 
 export async function getPosts(): Promise<Post[]> {
   try {

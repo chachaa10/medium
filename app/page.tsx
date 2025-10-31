@@ -1,10 +1,10 @@
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import { Suspense } from "react";
 import PostList from "@/app/components/features/post/post-list";
 import PostSkeleton from "@/app/components/features/post/skeleton";
 import { Button } from "@/app/components/ui/button";
 import { getCurrentUser } from "@/app/data/users";
-import Link from "next/link";
-import { redirect } from "next/navigation";
-import { Suspense } from "react";
 
 export default async function HomePage() {
   const session = await getCurrentUser();

@@ -1,14 +1,14 @@
 "use client";
 
+import type { LucideIcon } from "lucide-react";
+import type { Route } from "next";
+import Link from "next/link";
 import {
   SidebarGroup,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/app/components/ui/sidebar";
-import type { LucideIcon } from "lucide-react";
-import type { Route } from "next";
-import Link from "next/link";
 
 export function Nav({
   items,
@@ -29,10 +29,7 @@ export function Nav({
       <SidebarMenu className="flex flex-col justify-center gap-4 mt-4">
         {items.map((item) => (
           <SidebarMenuItem key={item.title}>
-            <SidebarMenuButton
-              asChild
-              tooltip={item.title}
-            >
+            <SidebarMenuButton asChild tooltip={item.title}>
               <Link
                 href={item.url as Route}
                 className="flex items-center gap-4"

@@ -1,11 +1,11 @@
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/app/components/features/navbar/theme-provider";
 import { AppSidebar } from "@/app/components/features/sidebar/app-sidebar";
 import Header from "@/app/components/layout/header";
 import { SidebarProvider } from "@/app/components/ui/sidebar";
 import { Toaster } from "@/app/components/ui/sonner";
 import { getCurrentUser } from "@/app/data/users";
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./global.css";
 
 const geistSans = Geist({
@@ -31,10 +31,7 @@ interface RootLayoutProps {
 export default async function RootLayout({ children }: RootLayoutProps) {
   const session = await getCurrentUser();
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-    >
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased scroll-smooth`}
       >

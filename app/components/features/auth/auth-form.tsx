@@ -1,5 +1,9 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { Button } from "@/app/components/ui/button";
 import {
   Form,
@@ -15,10 +19,6 @@ import { PasswordInput } from "@/app/components/ui/password-input";
 import { authClient } from "@/app/lib/auth-client";
 import type { UserSignin, UserSignup } from "@/app/lib/types";
 import { UserSigninSchema, UserSignupSchema } from "@/app/lib/types/models";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 
 interface AuthFormProps {
   haveAccount: boolean;

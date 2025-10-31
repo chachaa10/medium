@@ -1,15 +1,11 @@
 "use client";
-import { Toggle } from "@/app/components/ui/toggle";
 import type { Editor } from "@tiptap/react";
 import {
   Bold,
   Code,
-  Heading1,
   Heading2,
   Heading3,
   Heading4,
-  Heading5,
-  Heading6,
   Italic,
   List,
   ListOrdered,
@@ -19,6 +15,8 @@ import {
   Underline,
   Undo2,
 } from "lucide-react";
+import { Toggle } from "@/app/components/ui/toggle";
+
 interface MenuBarProps {
   editor: Editor;
 }
