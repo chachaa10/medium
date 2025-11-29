@@ -38,14 +38,14 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
-          enableSystem
           disableTransitionOnChange
+          enableSystem
           storageKey="medium-theme"
         >
           {session ? (
             <SidebarProvider className="flex flex-col">
               <Header />
-              <div className="flex pt-18">
+              <div className="flex">
                 <AppSidebar />
                 {children}
               </div>

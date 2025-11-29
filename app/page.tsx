@@ -12,7 +12,7 @@ export default async function HomePage() {
   }
 
   return (
-    <main className="mx-auto p-2 max-w-[80ch] container">
+    <main className="mx-auto p-2 pt-20 max-w-[80ch] container">
       <h1 className="font-bold text-4xl">Home Page</h1>
 
       <Suspense fallback={<PostSkeleton />}>

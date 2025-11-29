@@ -26,7 +26,7 @@ export function Editor() {
   }
 
   return (
-    <main className="space-y-4 mx-auto p-4 w-full max-w-[80ch]">
+    <main className="space-y-4 mx-auto p-4 pt-20 w-full max-w-[80ch]">
       <RichTextEditor onChange={handleOnChange} post={post} />
 
       <div className="gap-4 grid grid-cols-2">
