@@ -96,9 +96,10 @@ export default function MenuBar({ editor }: MenuBarProps) {
       {Options.map((option, index) => (
         <Toggle
           className="cursor-pointer"
+          // biome-ignore lint/suspicious/noArrayIndexKey: We want to use the index as the key
           key={index}
-          pressed={option.pressed}
           onPressedChange={option.onClick}
+          pressed={option.pressed}
         >
           {option.icon}
         </Toggle>

@@ -2,9 +2,9 @@
 import Typography from "@tiptap/extension-typography";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import type { Post } from "@/app/components/features/rich-text-editor/editor";
 import MenuBar from "@/app/components/features/rich-text-editor/menu-bar";
 import TitleTextArea from "@/app/components/features/rich-text-editor/title-textarea";
-import type { Post } from "@/app/new-post/page";
 
 interface RichTextEditorProps {
   post: Post;
@@ -44,7 +44,7 @@ export default function RichTextEditor({
       {editor && (
         <>
           <MenuBar editor={editor} />
-          <TitleTextArea title={post.title} onChange={handleTitleChange} />
+          <TitleTextArea onChange={handleTitleChange} title={post.title} />
           <EditorContent editor={editor} />
         </>
       )}

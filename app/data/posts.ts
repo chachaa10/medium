@@ -2,6 +2,7 @@
 
 import { and, eq, isNull } from "drizzle-orm";
 import { redirect } from "next/navigation";
+import sanitizeHtml from "sanitize-html";
 import { getAuthorName } from "@/app/data/authors";
 import { getCurrentUser } from "@/app/data/users";
 import type {
@@ -18,9 +19,6 @@ import { posts } from "@/drizzle/schema";
 
 export async function getPosts(): Promise<Post[]> {
   try {
-    const session = await getCurrentUser();
-    if (!session?.user?.id) throw new Error("Unauthorized");
-
     const response = await db
       .select()
       .from(posts)
@@ -36,9 +34,6 @@ export async function getPosts(): Promise<Post[]> {
 
 export async function getPostBySlug(slug: string): Promise<Post> {
   try {
-    const session = await getCurrentUser();
-    if (!session?.user?.id) throw new Error("Unauthorized");
-
     const response = await db
       .select()
       .from(posts)
@@ -58,9 +53,11 @@ export async function createPost(data: Omit<PostCreate, "authorId" | "slug">) {
     const session = await getCurrentUser();
     if (!session?.user?.id) throw new Error("Unauthorized");
 
+    const sanitizedContent = sanitizeHtml(data.content);
     const slug = slugify(data.title);
     const validatedPost = PostCreateSchema.parse({
       ...data,
+      content: sanitizedContent,
       authorId: session.user.id,
       slug: `${slug}-${randomStringGenerator(12)}`,
     });

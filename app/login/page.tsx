@@ -54,8 +54,8 @@ export default function LoginPage() {
           <p className="text-muted-foreground text-sm text-center">
             {haveAccount ? "No account?" : "Already have an account?"}
             <Button
-              variant={"link"}
               onClick={() => setHaveAccount(!haveAccount)}
+              variant={"link"}
             >
               {haveAccount ? "Create one" : "Login"}
             </Button>

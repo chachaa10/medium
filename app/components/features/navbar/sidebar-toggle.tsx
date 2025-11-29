@@ -8,7 +8,7 @@ export default function SidebarToggle() {
   const { toggleSidebar } = useSidebar();
 
   return (
-    <Button onClick={toggleSidebar} variant={"link"} className="cursor-pointer">
+    <Button className="cursor-pointer" onClick={toggleSidebar} variant={"link"}>
       <Menu />
     </Button>
   );

@@ -12,10 +12,10 @@ export default function Logout() {
         return authClient.signOut();
       }}
       className="cursor-pointer"
-      variant={"destructive"}
       onSuccess={() => {
         router.refresh();
       }}
+      variant={"destructive"}
     >
       Logout
     </BetterAuthActionButton>

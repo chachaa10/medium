@@ -14,9 +14,15 @@ export default async function PostPage({
 
   return (
     <main className="mx-auto w-full max-w-[80ch] container">
-      <h1 className="font-extrabold text-3xl">{post.title}</h1>
-      <p className="font-semibold text-lg italic">Author: {authorName}</p>
-      <p className="text-shadow-neutral-100">{post.content}</p>
+      <div className="pt-22">
+        <h1 className="font-extrabold text-3xl">{post.title}</h1>
+        <p className="font-semibold text-lg italic">Author: {authorName}</p>
+        <div
+          className="dark:prose-invert prose"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: Already sanitized
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        />
+      </div>
     </main>
   );
 }

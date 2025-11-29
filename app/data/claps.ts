@@ -1,6 +1,5 @@
 import { eq } from "drizzle-orm";
 import { getCurrentUser } from "@/app/data/users";
-import type { Clap } from "@/app/lib/types";
 import { db } from "@/drizzle/db";
 import { claps } from "@/drizzle/schema";
 

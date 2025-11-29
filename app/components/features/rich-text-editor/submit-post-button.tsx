@@ -20,9 +20,9 @@ export default function SubmitPostButton({
 
   return (
     <Button
-      onClick={handleSubmit}
       className={className}
       disabled={isSubmitting}
+      onClick={handleSubmit}
     >
       <LoadingSwap isLoading={isSubmitting}>Submit</LoadingSwap>
     </Button>

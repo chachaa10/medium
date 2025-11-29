@@ -84,7 +84,7 @@ export default function AuthForm(props: AuthFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
         {!haveAccount && (
           <FormField
             control={form.control}
@@ -127,7 +127,7 @@ export default function AuthForm(props: AuthFormProps) {
           )}
         />
 
-        <Button type="submit" className="w-full" disabled={isSubmitting}>
+        <Button className="w-full" disabled={isSubmitting} type="submit">
           <LoadingSwap isLoading={isSubmitting}>
             {haveAccount ? "Login" : "Sign Up"}
           </LoadingSwap>

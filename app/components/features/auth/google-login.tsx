@@ -13,14 +13,14 @@ export default function GoogleLogin({ haveAccount }: GoogleLoginProps) {
     <div className="space-y-4">
       {/* TODO: handle loading and error state */}
       <BetterAuthActionButton
-        variant="outline"
-        className="rounded-2xl w-full"
         action={() => {
           return authClient.signIn.social({
             provider: "google",
             callbackURL: "/",
           });
         }}
+        className="rounded-2xl w-full"
+        variant="outline"
       >
         <Google className="size-5" />
         {haveAccount ? "Sign in with Google" : "Sign up with Google"}
