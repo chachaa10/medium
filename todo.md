@@ -30,7 +30,7 @@
   - [x] Create GitHub repo (public/private as desired)
   - [x] Add `README.md` (short project brief)
   - [x] Add `.gitignore`
-  - [ ] Add `LICENSE`
+  - [x] Add `LICENSE`
   - [ ] Add `CODE_OF_CONDUCT.md` (optional)
   - Acceptance: Repo visible, cloning works, README contains project goal and stack.
 
